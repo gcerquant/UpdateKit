@@ -1,0 +1,11 @@
+//
+// Prefix header for all source files of the 'UpdateKit' target in the 'UpdateKit' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+
+    #import <Foundation/Foundation.h>
+
+    #define kCurrentVersionNumber @"0.1"
+#endif

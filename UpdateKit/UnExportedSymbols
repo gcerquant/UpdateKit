@@ -1,0 +1,13 @@
+AFHTTPClient
+_AFHTTPClient
+_AFHTTPRequestOperation
+_AFImageCache
+_AFImageRequestOperation
+_AFJSONRequestOperation
+_AFJSONUtilities
+_AFNetworkActivityIndicatorManager
+_AFNetworking
+_AFPropertyListRequestOperation
+_AFURLConnectionOperation
+_AFXMLRequestOperation
+_UIImageView+AFNetworking
