@@ -27,7 +27,7 @@
 		A98AFCC714B75C720002B353 /* LambdaAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = A98AFCB714B75C710002B353 /* LambdaAlert.m */; };
 		A98AFCC814B75C720002B353 /* LambdaSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A98AFCB914B75C710002B353 /* LambdaSheet.m */; };
 		A98AFCC914B75C720002B353 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A98AFCBB14B75C710002B353 /* ViewController.m */; };
-		A98AFCCD14B75C9F0002B353 /* libUpdateKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A98AFCCB14B75C9F0002B353 /* libUpdateKit.a */; };
+		A9C4562F14D6F0EE00817823 /* UpdateKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C4562E14D6F0EE00817823 /* UpdateKit.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,8 +70,8 @@
 		A98AFCB914B75C710002B353 /* LambdaSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LambdaSheet.m; sourceTree = "<group>"; };
 		A98AFCBA14B75C710002B353 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A98AFCBB14B75C710002B353 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		A98AFCCB14B75C9F0002B353 /* libUpdateKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUpdateKit.a; sourceTree = "<group>"; };
 		A98AFCCC14B75C9F0002B353 /* UpdateKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateKit.h; sourceTree = "<group>"; };
+		A9C4562E14D6F0EE00817823 /* UpdateKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = UpdateKit.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 				A98AFC0F14B754890002B353 /* UIKit.framework in Frameworks */,
 				A98AFC1114B754890002B353 /* Foundation.framework in Frameworks */,
 				A98AFC1314B754890002B353 /* CoreGraphics.framework in Frameworks */,
-				A98AFCCD14B75C9F0002B353 /* libUpdateKit.a in Frameworks */,
+				A9C4562F14D6F0EE00817823 /* UpdateKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +202,7 @@
 		A98AFCCA14B75C9F0002B353 /* UpdateKit */ = {
 			isa = PBXGroup;
 			children = (
-				A98AFCCB14B75C9F0002B353 /* libUpdateKit.a */,
+				A9C4562E14D6F0EE00817823 /* UpdateKit.a */,
 				A98AFCCC14B75C9F0002B353 /* UpdateKit.h */,
 			);
 			name = UpdateKit;
