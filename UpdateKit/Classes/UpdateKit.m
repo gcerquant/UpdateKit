@@ -6,6 +6,12 @@
 //  Copyright (c) 2012 MacMation. All rights reserved.
 //
 
+#ifndef __has_feature
+#define __has_feature(x) 0 /* for non-clang compilers */
+#endif
+#if ! __has_feature(objc_arc)
+#warning The code of this file is ARC-enabled. Add the -f-objc-arc tag
+#endif
 
 //NSString const * kUpdateKitHostname = @"http://192.168.0.13:4200"; Keeping this around for debug
 NSString * const kUpdateKitHostname = @"http://updateKit.com";
