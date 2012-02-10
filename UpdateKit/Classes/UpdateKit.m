@@ -20,10 +20,10 @@
 #endif
 
 
-//NSString * const kUpdateKitHostname = @"http://updateKit.com";
+NSString * const kUpdateKitHostname = @"http://updateKit.com";
 
 //NSString const * kUpdateKitHostname = @"http://192.168.0.13:4200"; Keeping this around for debug
-NSString const * kUpdateKitHostname = @"http://localhost:3210"; // Keeping this around for debug
+//NSString const * kUpdateKitHostname = @"http://localhost:3210"; // Keeping this around for debug
 
 NSString * const kPreferenceProductURL = @"productURL";
 
