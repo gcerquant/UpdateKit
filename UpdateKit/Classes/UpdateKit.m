@@ -6,6 +6,10 @@
 //  Copyright (c) 2012 MacMation. All rights reserved.
 //
 
+
+#define COCOA_UPDATEKIT_VERSION_NUMBER @"0.1"
+
+
 #include "TargetConditionals.h"
 
 #ifndef __has_feature
@@ -15,9 +19,11 @@
 #warning The code of this file is ARC-enabled. Add the -f-objc-arc tag
 #endif
 
-//NSString const * kUpdateKitHostname = @"http://192.168.0.13:4200"; Keeping this around for debug
-NSString const * kUpdateKitHostname = @"http://localhost:4242"; // Keeping this around for debug
+
 //NSString * const kUpdateKitHostname = @"http://updateKit.com";
+
+//NSString const * kUpdateKitHostname = @"http://192.168.0.13:4200"; Keeping this around for debug
+NSString const * kUpdateKitHostname = @"http://localhost:3210"; // Keeping this around for debug
 
 NSString * const kPreferenceProductURL = @"productURL";
 
@@ -27,13 +33,28 @@ NSString * const kPreferenceProductURL = @"productURL";
 #import "UpdateKit.h"
 
 
+
+@interface UpdateKit ()
+
++ (void) checkForUpdateKitFrameworkUpdate;
+
+@end
+
+
+
+
 @implementation UpdateKit
 
 
 
 + (void)checkForUpdate {
     
-    NSLog(@"Checking if update is published on AppStore, with UpdateKit. www.updatekit.com. (Library version: %@", kCurrentVersionNumber);
+#if TARGET_IPHONE_SIMULATOR
+    [UpdateKit checkForUpdateKitFrameworkUpdate];
+#endif
+    
+    
+    NSLog(@"Checking if update is published on AppStore, with UpdateKit. www.updatekit.com. (Library version: %@", COCOA_UPDATEKIT_VERSION_NUMBER);
     
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *currentVersionNumber = [infoDictionary valueForKey:@"CFBundleVersion"];
@@ -103,5 +124,34 @@ NSString * const kPreferenceProductURL = @"productURL";
 }
 
 
+
+/* Dear developer,
+ * It would be a bit ironic to let you ship a new version of your app with an old version of the UpdateKit framework
+ */
++ (void) checkForUpdateKitFrameworkUpdate {
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[kUpdateKitHostname stringByAppendingFormat:@"/cocoa_framework_version"]]];
+    
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
+                                                                                            
+                                                                                            //                                                                                            NSLog(@"json result: %@", json);
+                                                                                            //                                                                                            NSLog(@"Update?: %d", [[json valueForKey:@"update_is_available"] boolValue]);
+                                                                                            NSString 
+                                                                                            *currentVersionNumber;
+                                                                                            if ((currentVersionNumber = [json valueForKey:@"current_version"])) {
+                                                                                                if (! [currentVersionNumber isEqual:COCOA_UPDATEKIT_VERSION_NUMBER]) {
+                                                                                                    NSLog(@"A new version of the UpdateKit framework is available. You can get it at www.updateKit.com");
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                        failure:nil];
+
+    
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperation:operation];
+
+}
 
 @end
