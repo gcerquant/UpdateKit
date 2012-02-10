@@ -26,7 +26,7 @@ Then, wherever you want, call the checkForUpdate method.
         // ...
         [self.window makeKeyAndVisible];
 
-        [[[UpdateKit alloc] init] checkForUpdate];
+        [UpdateKit checkForUpdate];
 
         return YES;
     }
@@ -34,23 +34,20 @@ Then, wherever you want, call the checkForUpdate method.
 
 ## Create your application on updateKit.com
 
-The library communicates with a webservice at updatekit.com to know about the lastest version published on the AppStore. This webservice does all the work of getting the version number of the latest app on the AppStore. This is great, because once it is set-up, you don't have to remember to update it at each update. But for that, you have to create an instance of your application.  
+The library communicates with a webservice at updatekit.com to know about the lastest version published on the AppStore. This webservice does all the work of getting the version number of the latest app on the AppStore. This is great, because once it is set-up, you don't have to remember to update it at each update.
 
-Simply run your application, in the Simulator on or on your device, and look for the following message in the console:  
+When you ask the webservice if there is an update for an application it does not know, it creates it.
+By default, an application is in automatic mode: it fetches the information from the AppStore.
 
-    Error while getting update information: No application found for identifier com.updateKit.demo. Go to http://updatekit.com/ios_applications/bundle_identifier/com.updateKit.demo to create it.
-
-Copy and paste the url in your browser, then fill and submit the form.
-
-That's it.
+If you have not yet published your application, you might want to go to www.updatekit.com and set your application to manual mode.
 
 ## Protect your application
 
-If you don't want anyone but you to edit the settings of your application, create yourself an account using the sign-up link. Then, visit your application page, and click on the "Protect this Application" link.
+If you want no one but you to edit the settings of your application, you must protect it. To do that, simply log in and on your application page, click on the "Protect this Application" link.
     
 ## State of the project
 
 This framework has been built for iOS 5.0 and more. It is compatible with iPhone and iPad.
 
-This project is still in beta. Let me know if you get any bug, or wanna help on the code.
+This project is still in beta. Let me know if you get any bug, or wanna help on the code. You can look at the ticket lists of the framework ([here](http://github.com/gcerquant/UpdateKit/issues)) and the webservice ([here](http://github.com/gcerquant/UpdateKit.com/issues)). 
     
