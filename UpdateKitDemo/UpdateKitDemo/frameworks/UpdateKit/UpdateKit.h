@@ -10,6 +10,7 @@
 
 @interface UpdateKit : NSObject
 
-- (void) checkForUpdate;
++ (void) checkForUpdate;
++ (NSString *) linkOfMyAppStorePage;
 
 @end

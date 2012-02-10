@@ -37,7 +37,7 @@
     
     [[AFJSONRequestOperation alloc] init];
     
-    [[[UpdateKit alloc] init] checkForUpdate];
+    [UpdateKit checkForUpdate];
     
     
     return YES;

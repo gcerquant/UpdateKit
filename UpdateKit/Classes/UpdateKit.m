@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 MacMation. All rights reserved.
 //
 
+#include "TargetConditionals.h"
+
 #ifndef __has_feature
 #define __has_feature(x) 0 /* for non-clang compilers */
 #endif
@@ -14,7 +16,8 @@
 #endif
 
 //NSString const * kUpdateKitHostname = @"http://192.168.0.13:4200"; Keeping this around for debug
-NSString * const kUpdateKitHostname = @"http://updateKit.com";
+NSString const * kUpdateKitHostname = @"http://localhost:4242"; // Keeping this around for debug
+//NSString * const kUpdateKitHostname = @"http://updateKit.com";
 
 NSString * const kPreferenceProductURL = @"productURL";
 
@@ -26,17 +29,9 @@ NSString * const kPreferenceProductURL = @"productURL";
 
 @implementation UpdateKit
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
 
-- (void)checkForUpdate {
+
++ (void)checkForUpdate {
     
     NSLog(@"Checking if update is published on AppStore, with UpdateKit. www.updatekit.com. (Library version: %@", kCurrentVersionNumber);
     
@@ -51,8 +46,8 @@ NSString * const kPreferenceProductURL = @"productURL";
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id json) {
         
-                                                                                            NSLog(@"json result: %@", json);
-                                                                                            NSLog(@"Update?: %d", [[json valueForKey:@"update_is_available"] boolValue]);
+//                                                                                            NSLog(@"json result: %@", json);
+//                                                                                            NSLog(@"Update?: %d", [[json valueForKey:@"update_is_available"] boolValue]);
         if ([json valueForKey:@"error"]) {
             NSLog(@"Error while getting update information: %@", [json valueForKey:@"error"]);
             return;
@@ -70,14 +65,23 @@ NSString * const kPreferenceProductURL = @"productURL";
             }];
             
             [updateAvailableAlert addButtonWithTitle:@"Mettre à jour" block:^{
+
+#if TARGET_IPHONE_SIMULATOR
+
+                [[[UIAlertView alloc] initWithTitle:@"Update only on device" message:@"We do not update the application while running in the simulator.\nIf you were on the device, the update page would be opened." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+#else
+                
                 NSString *updateURL = [json valueForKey:@"update_url"];
                 if (updateURL) {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:updateURL]];
+                } else {
+                    NSLog(@"Invalid update url: %@", updateURL);
                 }
+#endif
             }];
             [updateAvailableAlert show];
         } else {
-            NSLog(@"Error in JSON result. Error message: %@", [json valueForKey:@"error"]);
+            // No update available
         }
         
                                                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -90,7 +94,7 @@ NSString * const kPreferenceProductURL = @"productURL";
     
 }
 
-- (NSString *) linkOfMyAppStorePage {
++ (NSString *) linkOfMyAppStorePage {
     if ([[NSUserDefaults standardUserDefaults] valueForKey:kPreferenceProductURL]) {
         return [[NSUserDefaults standardUserDefaults] valueForKey:kPreferenceProductURL];
     } else {
